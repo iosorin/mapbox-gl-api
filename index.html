@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.0/mapbox-gl-language.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="map">
+        <div class="map_outer">
+            <div class="map_loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="map_sidebar">
+                <div class="map_heading">Аптеки</div>
+                <div class="map_list"></div>
+            </div>
+            <div class="map_inner" id="map-inner"></div>
+        </div>
+    </div>
+
+    <script src="places.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
