@@ -19,7 +19,6 @@ const map = new mapboxgl.Map({
 
 const loader = document.querySelector('.map_loader');
 
-
 map.on('load', (e) => {
     loader.classList.add('leave-fade');
     setTimeout(() => {
@@ -44,8 +43,10 @@ map.on('load', (e) => {
 
 places.features.forEach((marker, i) => {
     const el = document.createElement('div');
+
     el.id = `marker-${ i}`;
     el.className = 'marker';
+
     new mapboxgl.Marker(el, { offset: [0, -23] })
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
@@ -63,7 +64,6 @@ places.features.forEach((marker, i) => {
     });
 });
 
-
 function flyToStore(currentFeature) {
     map.flyTo({
         center: currentFeature.geometry.coordinates,
@@ -71,11 +71,12 @@ function flyToStore(currentFeature) {
     });
 }
 
-
 function createPopUp(currentFeature) {
     const popUps = document.getElementsByClassName('mapboxgl-popup');
-    if (popUps[0]) popUps[0].remove();
 
+    if (popUps[0]) {
+        popUps[0].remove();
+    }
 
     const popup = new mapboxgl.Popup({ anchor: 'bottom', closeOnClick: false, closeButton: false })
         .setLngLat(currentFeature.geometry.coordinates)
@@ -93,29 +94,38 @@ function buildLocationList(data) {
 
         const placeList = document.querySelector('.map_list');
         const listing = placeList.appendChild(document.createElement('div'));
+
         listing.className = 'map_li';
         listing.id = `map-li-${ i}`;
 
         const link = listing.appendChild(document.createElement('a'));
+
         link.href = '#';
         link.className = 'map_linkTo';
         link.dataPosition = i;
 
         const details = listing.appendChild(document.createElement('div'));
+
         details.className = 'map_liDetails';
         details.innerHTML = `<div class="map_liTitle">${prop.title}</div> <p>${prop.address}</p>`;
+
         if (prop.site) {
             const site = listing.appendChild(document.createElement('a'));
+
             site.href = prop.site;
             site.target = '_blank';
             site.innerHTML = prop.siteFormatted;
             // details.innerHTML += `<a href="${prop.site}" target="_blank">${prop.siteFormatted}</a>`;
         }
+
         link.addEventListener('click', function (e) {
             const clickedListing = data.features[this.dataPosition];
+
             flyToStore(clickedListing);
             createPopUp(clickedListing);
+
             const activeItem = document.getElementsByClassName('is-active');
+
             if (activeItem[0]) {
                 activeItem[0].classList.remove('is-active');
             }
